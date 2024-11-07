@@ -24,8 +24,8 @@ if (!props.item) {
 if (!(typeof props.item?.id === 'string') || props.item.id === '') {
   throw new Error('item.id is required')
 }
-if (!Array.isArray(props.item?.children)) {
-  throw new Error('item.children array is required')
+if (!Array.isArray(props.item?.subClasses)) {
+  throw new Error('item.subClasses array is required')
 }
 if (!('expanded' in props.item)) {
   throw new Error('item.expanded is required')
@@ -68,7 +68,7 @@ const possibleMoveMutations = computed<MoveMutationProposal[]>(() => {
   // If we have expanded children, node must be first child (no other options)
   // If we are a leaf/collapsed, node can be sibling or child (must be last if collapsed)
   // If we are the last child, node can also move up to ancestors
-  if (props.item.children.filter(node => node.id !== dragItemId).length > 0 && props.item.expanded) {
+  if (props.item.subClasses.filter(node => node.id !== dragItemId).length > 0 && props.item.expanded) {
     return [{ id: dragItemId, targetId: props.item.id, position: 'FIRST_CHILD', ghostIndent: props.depth + 1 }]
   }
   const getOffsetIndent: (index: number) => number = (index: number) => props.depth - (props.ancestors.length - index)
@@ -151,15 +151,15 @@ const isBeingDraggedStyle = computed(() => dragItem?.value?.id === props.item.id
       />
     </div>
 
-    <!-- Display children if expanded -->
+    <!-- Display subClasses if expanded -->
     <!-- TODO: replacing v-show with v-if produces inexplicable errors -->
     <TreeNode
-      v-for="(node, index) in item?.children || []"
+      v-for="(node, index) in item?.subClasses || []"
       v-show="item.expanded"
       :key="node.id"
       :item="node"
       :component="component"
-      :ancestors="index === (item.children.length - 1) || (index === (item.children.length - 2) && dragItem?.id === item?.children[item.children.length - 1]?.id) ? [...ancestors, item.id] : []"
+      :ancestors="index === (item.subClasses.length - 1) || (index === (item.subClasses.length - 2) && dragItem?.id === item?.subClasses[item.subClasses.length - 1]?.id) ? [...ancestors, item.id] : []"
       :drop-target="dropTarget"
       :depth="depth + 1"
       :delta-x="deltaX"

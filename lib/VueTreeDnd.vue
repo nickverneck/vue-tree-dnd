@@ -49,8 +49,8 @@ provide('setExpanded', (expanded: boolean, treeItemId: TreeItemId) => {
     if (node.id === treeItemId) {
       node.expanded = expanded
     }
-    if (node.children !== undefined) {
-      node.children.forEach(traverse)
+    if (node.subClasses !== undefined) {
+      node.subClasses.forEach(traverse)
     }
   }
   clonedTree.forEach(traverse)

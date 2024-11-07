@@ -6,12 +6,12 @@ export type TreeItemId = string | number
 export interface TreeItem {
   id: TreeItemId
   expanded: boolean
-  children: TreeItem[]
+  subClasses: TreeItem[]
 }
 interface FlatTreeItem {
   id: ItemId
   expanded: boolean
-  children: TreeItem[]
+  subClasses: TreeItem[]
   __vue_dnd_tree_ancestors: ItemId[]
 }
 
