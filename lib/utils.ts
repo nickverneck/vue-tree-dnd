@@ -9,7 +9,7 @@ export const getFlatTreeWithAncestors: (nodes: TreeItem[]) => FlatTreeItem[] = (
       ...node,
       __vue_dnd_tree_ancestors: parentIds
     })
-    for (const child of node.children) {
+    for (const child of node.subClasses) {
       traverse(child, [...parentIds, node.id])
     }
   }
