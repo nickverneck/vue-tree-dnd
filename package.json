@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jcuenod/vue-tree-dnd"
+    "url": "https://github.com/nickverneck/vue-tree-dnd"
   },
   "private": false,
   "version": "0.2.0",
